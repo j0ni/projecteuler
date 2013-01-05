@@ -13,15 +13,13 @@
   (loop for i in factors
        always (= (rem n i) 0)))
 
-(defun find-multiple (m step factors acc)
-  (cond ((>= m acc) acc)
-        ((is-multiple m factors) (find-multiple (+ m step) step factors m))
-        (t (find-multiple (+ m step) step factors acc))))
+(defun find-multiple (m step factors)
+  (if (is-multiple m factors) m
+      (find-multiple (+ m step) step factors)))
 
 (defun find-solution (n)
   (let* ((factors (factors n))
-         (multiple (apply #'* factors))
          (step (apply #'max factors)))
-    (find-multiple step step factors multiple)))
+    (find-multiple step step factors)))
 
 (format t "~d~%" (find-solution 20))
