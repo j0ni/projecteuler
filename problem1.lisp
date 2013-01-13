@@ -3,16 +3,17 @@
 
 ;; Find the sum of all the multiples of 3 or 5 below 1000.
 
-(load "shared.lisp")
+(defpackage :problem1
+  (:use :common-lisp :euler-shared)
+  (:export #:sum-multiples #:multiples))
 
-(defun multiples-1 (base x max)
-  (if (>= base max) nil
-      (cons base (multiples-1 (+ base x) x max))))
+(in-package :problem1)
 
 (defun multiples (x max)
-  (multiples-1 x x max))
+  (labels ((multiples (base x max)
+             (if (>= base max) nil
+                 (cons base (multiples (+ base x) x max)))))
+    (multiples x x max)))
 
 (defun sum-multiples (max)
   (sum (union (multiples 3 max) (multiples 5 max))))
-
-(format t "~d~%" (sum-multiples 1000))
