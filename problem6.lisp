@@ -11,17 +11,16 @@
 ;; Find the difference between the sum of the squares of the first one
 ;; hundred natural numbers and the square of the sum.
 
-(load "shared.lisp")
+(in-package :j0ni-euler)
 
 (defun square (n)
   (* n n))
 
-(defun sum-of-squares-1 (n acc)
-  (if (= n 1) 1
-      (+ (square n) (sum-of-squares-1 (1- n) acc))))
-
 (defun sum-of-squares (n)
-  (sum-of-squares-1 n 0))
+  (labels ((sum-of-squares (n acc)
+             (if (= n 1) 1
+                 (+ (square n) (sum-of-squares (1- n) acc)))))
+    (sum-of-squares n 0)))
 
 (defun square-of-sums (n)
   (square
@@ -29,5 +28,5 @@
     (loop for i from 1 to n
        collect i))))
 
-(defun find-solution (n)
+(defun sum-square-diff (n)
   (- (square-of-sums n) (sum-of-squares n)))

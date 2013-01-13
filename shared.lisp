@@ -1,8 +1,4 @@
-(defpackage :euler-shared
-  (:use :common-lisp)
-  (:export #:sum))
-
-(in-package :euler-shared)
+(in-package :j0ni-euler)
 
 (defun sum (l)
   (if (endp l) 0

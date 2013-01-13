@@ -3,6 +3,8 @@
 
 ;; What is the 10 001st prime number?
 
+(in-package :j0ni-euler)
+
 (defun find-factor (n acc)
   (if (= (length acc) 1) nil
       (let ((candidate (car acc)))
@@ -10,12 +12,10 @@
               ((> candidate (sqrt n)) nil)
               (t (find-factor n (cdr acc)))))))
 
-(defun get-prime-1 (n base acc)
-  (cond ((= n (length acc)) (car acc))
-        ((not (find-factor base (reverse acc))) (get-prime-1 n (+ base 2) (cons base acc)))
-        (t (get-prime-1 n (+ base 2) acc))))
-
 (defun get-prime (n)
-  (get-prime-1 n 3 '(2)))
-
-(format t "~d~%" (get-prime 10001))
+  (labels ((get-prime (n base acc)
+             (cond ((= n (length acc)) (car acc))
+                   ((not (find-factor base (reverse acc)))
+                    (get-prime n (+ base 2) (cons base acc)))
+                   (t (get-prime n (+ base 2) acc)))))
+    (get-prime n 3 '(2))))

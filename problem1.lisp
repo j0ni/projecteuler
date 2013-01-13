@@ -3,11 +3,7 @@
 
 ;; Find the sum of all the multiples of 3 or 5 below 1000.
 
-(defpackage :problem1
-  (:use :common-lisp :euler-shared)
-  (:export #:sum-multiples #:multiples))
-
-(in-package :problem1)
+(in-package :j0ni-euler)
 
 (defun multiples (x max)
   (labels ((multiples (base x max)

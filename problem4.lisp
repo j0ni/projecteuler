@@ -5,17 +5,14 @@
 ;; Find the largest palindrome made from the product of two 3-digit
 ;; numbers.
 
+(in-package :j0ni-euler)
+
 (defvar max-factor 999)
 (defvar min-factor 100)
 
 (defun is-palindromic (num)
   (let ((str (write-to-string num)))
     (string= str (reverse str))))
-
-(defun find-palindromes (top bottom acc)
-  (cond ((= top bottom) acc)
-        ((is-palindromic bottom) (find-palindromes top (1+ bottom) (cons bottom acc)))
-        (t (find-palindromes top (1+ bottom) acc))))
 
 (defun find-factors (palindrome candidate)
   (if (< candidate min-factor) nil
@@ -30,7 +27,15 @@
          (result (find-factors palindrome 999)))
     (if result result (find-solution (cdr palindromes)))))
 
-(let* ((top (* max-factor max-factor))
-       (bottom (* min-factor min-factor))
-       (palindromes (find-palindromes top bottom nil)))
-  (format t "~{palindrome: ~d; factors: ~d, ~d~}~%" (find-solution palindromes)))
+(defun find-palindrome ()
+  (labels ((find-palindromes (top bottom acc)
+             (cond ((= top bottom) acc)
+                   ((is-palindromic bottom)
+                    (find-palindromes top (1+ bottom) (cons bottom acc)))
+                   (t (find-palindromes top (1+ bottom) acc)))))
+    (let* ((top (* max-factor max-factor))
+           (bottom (* min-factor min-factor))
+           (palindromes (find-palindromes top bottom nil)))
+      (find-solution palindromes))))
+
+;; (format t "~{palindrome: ~d; factors: ~d, ~d~}~%" (find-solution palindromes))

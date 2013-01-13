@@ -4,6 +4,8 @@
 ;; What is the smallest positive number that is evenly divisible by
 ;; all of the numbers from 1 to 20?
 
+(in-package :j0ni-euler)
+
 (defun factors (n)
   (reverse
    (loop for i from 1 to n
@@ -17,9 +19,7 @@
   (if (is-multiple m factors) m
       (find-multiple (+ m step) step factors)))
 
-(defun find-solution (n)
+(defun smallest-number-divisible-by (n)
   (let* ((factors (factors n))
          (step (apply #'max factors)))
     (find-multiple step step factors)))
-
-(format t "~d~%" (find-solution 20))
