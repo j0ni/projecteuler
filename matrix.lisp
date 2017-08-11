@@ -1,3 +1,5 @@
+;; Some matrix functions
+
 (defun matrix+-2 (m1 m2 acc)
   (if (endp m1) (reverse acc)
       (let ((x (car m1))
