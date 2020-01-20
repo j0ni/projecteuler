@@ -19,4 +19,5 @@
    (:file "problem5" :depends-on ("j0ni-euler"))
    (:file "problem6" :depends-on ("j0ni-euler" "shared"))
    (:file "problem7" :depends-on ("j0ni-euler"))
-   (:file "problem8" :depends-on ("j0ni-euler"))))
+   (:file "problem8" :depends-on ("j0ni-euler"))
+   (:file "problem9" :depends-on ("j0ni-euler"))))

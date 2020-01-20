@@ -30,3 +30,6 @@
 
 (define-test problem8
   (assert-true (= 40824 (max-product-term))))
+
+(define-test problem9
+  (assert-true (= 31875000 (find-pt-product 1000))))
